@@ -75,6 +75,30 @@
             </div>
         </div>
     </div>
+    <!--Modal de Alocação de usuarios-->
+    <div class="modal fade" id="aloca-user">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Alocação de Usuários</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="justify-content-center">
+                        <h6 class="m-auto">Direito</h6>
+                    </div>
+                    <div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section>
         <!-- Navbar Section -->
@@ -122,12 +146,12 @@
         </div>
 
         <!-- Main Content Section -->
-        <div class="height-100 bg-light">
+        <div class="height-100">
         <h4>Gestão de Cursos</h4>
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-2">
+                <div class="col-1">
                     <input type="text" class="form-control" id="" placeholder="Id">
                 </div>
                 <div class="col-3">
@@ -150,21 +174,23 @@
                         <option value="0">Misto</option>
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <button id="btn_add" type="button" class="btn btn-primary">
                         Pesquisar
                     </button>
                     <button id="btn_unfilter" type="button" class="btn btn-secondary">Limpar busca</button>
+                    <button id="btn_unfilter" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cadastro-curso">Novo Registro</button>
                 </div>
             </div>
             <br>    
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Nível</th>
                         <th scope="col">Tipo</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -183,6 +209,11 @@
                         <td>
                             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
                                 <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#aloca-user">
+                                <i class="bi bi-plus"></i>
                             </button>
                         </td>
                     </tr>
