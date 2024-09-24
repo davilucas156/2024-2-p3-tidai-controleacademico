@@ -43,7 +43,7 @@
                     <form class="row g-3">
                         <div class="col-3">
                             <label for="inputAddress" class="form-label">Id</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="">
+                            <input type="text" class="form-control" id="inputAddress" placeholder="001" disabled>
                         </div>
                         <div class="col-9">
                             <label for="inputAddress" class="form-label">Nome</label>
@@ -75,37 +75,13 @@
             </div>
         </div>
     </div>
-    <!--Modal de Alocação de usuarios-->
-    <div class="modal fade" id="aloca-user">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title">Alocação de Usuários</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="justify-content-center">
-                        <h6 class="m-auto">Direito</h6>
-                    </div>
-                    <div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Confirmar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <section>
         <!-- Navbar Section -->
         <div class="l-navbar">
             <nav class="nav">
                 <div>
-                    <a href="#" class="nav_logo">
+                    <a href="Index.html" class="nav_logo">
                         <i class='bx bx-layer nav_logo-icon'></i>
                         <span class="nav_logo-name">Secretário</span>
                     </a>
@@ -124,9 +100,8 @@
                         <a href="alocação-usuarios.html" class="nav_link">
                             <i class='bx bx-bookmark nav_icon'></i>
                             <span class="nav_name">Alocação de Usuários</span>
-                        
                         </a>
-                        <a href="a.html" class="nav_link">
+                        <a href="relatorios.html" class="nav_link">
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Relátorios</span>
                         </a>
@@ -138,7 +113,7 @@
                 </div>
 
                 <!-- Sign Out Link -->
-                <a href="#" class="nav_link">
+                <a href="/src/index.html" class="nav_link">
                     <i class='bx bx-log-out nav_icon'></i>
                     <span class="nav_name">Sair</span>
                 </a>
@@ -192,7 +167,6 @@
                         <th scope="col">Tipo</th>
                         <th></th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -209,11 +183,6 @@
                         <td>
                             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirma-exclusao">
                                 <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#aloca-user">
-                                <i class="bi bi-plus"></i>
                             </button>
                         </td>
                     </tr>
