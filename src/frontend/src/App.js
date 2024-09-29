@@ -1,21 +1,16 @@
 import './styles/App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './views/HomePage'; 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-        First componenent (Index)</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />} /> {/* Página Home */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
