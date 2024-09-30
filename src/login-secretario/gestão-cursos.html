@@ -66,6 +66,37 @@
                                 <option>Misto</option>
                             </select>
                         </div>
+                        <div class="container bg-light p-3 my-3">
+                            <div class="row mb-3 align-items-center">
+                              <h6 class="form-label mt-3">Disciplinas por Semestre</h6>
+                            </div>
+                          
+                            <div class="row align-items-center mb-2">
+                              <!-- Disciplina -->
+                              <div class="col-6">
+                                <input type="text" class="form-control" id="nome" placeholder="Disciplina" />
+                              </div>
+                          
+                              <!-- Semestre -->
+                              <div class="col-3">
+                                <input type="text" class="form-control" id="semestre" placeholder="Semestre" />
+                              </div>
+                          
+                              <!-- Ícone de lixeira -->
+                              <div class="col-2 text-center">
+                                <button id="btn_unfilter" type="button" class="btn btn-outline-danger">
+                                  <i class="bi bi-trash"></i>
+                                </button>
+                              </div>
+                          
+                              <!-- Botão de adicionar -->
+                              <div class="my-3">
+                                <button class="btn btn-outline-primary">
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                          </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -97,17 +128,9 @@
                             <i class='bx bx-message-square-detail nav_icon'></i>
                             <span class="nav_name">Gestão de Cursos</span>
                         </a>
-                        <a href="alocação-usuarios.html" class="nav_link">
-                            <i class='bx bx-bookmark nav_icon'></i>
-                            <span class="nav_name">Alocação de Usuários</span>
-                        </a>
                         <a href="relatorios.html" class="nav_link">
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Relátorios</span>
-                        </a>
-                        <a href="calendario.html" class="nav_link">
-                            <i class='bx bx-folder nav_icon'></i>
-                            <span class="nav_name">Caléndario</span>
                         </a>
                     </div>
                 </div>
@@ -165,6 +188,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Nível</th>
                         <th scope="col">Tipo</th>
+                        <th scope="col">Disciplinas</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -175,6 +199,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>15</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
@@ -191,6 +216,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>11</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
@@ -207,6 +233,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>7</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
@@ -223,6 +250,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>15</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
@@ -239,6 +267,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>21</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
@@ -255,6 +284,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>15</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
@@ -271,6 +301,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>35</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
@@ -287,6 +318,7 @@
                         <td>Análise e Desenvolvimento de Sistemas</td>
                         <td>Graduação</td>
                         <td>Misto</td>
+                        <td>15</td>
                         <td>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cadastro-curso">
                                 <i class="bi bi-pencil-square"></i>
