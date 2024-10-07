@@ -54,25 +54,56 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-3 bg-success">
-                <h5>Notas</h5>
-
-                    <button id="btn_unfilter" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
-
+                <div class="col-4">
+                    <select class="form-select form-select-md mb-3" aria-label="Large select example">
+                        <option selected>Selecione o curso</option>
+                        <option value="1">TI</option>
+                        <option value="2">ADS</option>
+                        <option value="3">SI</option>
+                    </select>
                 </div>
-                <div class="col-3 bg-warning">
-                    <h5>Frequência</h5>
-                    <button id="btn_unfilter" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
+                <div class="col-4">
+                    <select class="form-select form-select-md" aria-label="Small select example">
+                        <option selected>Selecione a disciplina</option>
+                        <option value="1">NOSQL</option>
+                        <option value="2">TIDAI</option>
+                        <option value="3">FRONTEND</option>
+                    </select>
                 </div>
-                <div class="col-3 bg-success">
-                    <h5>Histórico escolar</h5>
-                    <button id="btn_unfilter" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
-                </div>
-                <div class="col-3 bg-warning">
-                    <h5>Relação de professores</h5>
-                    <button id="btn_unfilter" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
+                <div class="col-4">
+                    <input type="text" class="form-control" id="inputId" placeholder="Matrícula">
                 </div>
             </div>
+            
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-3 mb-4">
+                    <div class="p-3 bg-primary text-white rounded">
+                        <h5>Notas</h5>
+                        <button id="btn_notas" type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
+                    </div>
+                </div>
+                <div class="col-3 mb-4">
+                    <div class="p-3 bg-primary text-white rounded">
+                        <h5>Frequência</h5>
+                        <button id="btn_frequencia" type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
+                    </div>
+                </div>
+                <div class="col-3 mb-4">
+                    <div class="p-3 bg-primary text-white rounded">
+                        <h5>Histórico escolar</h5>
+                        <button id="btn_historico" type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
+                    </div>
+                </div>
+                <div class="col-3 mb-4">
+                    <div class="p-3 bg-primary text-white rounded">
+                        <h5>Relação de usuarios</h5>
+                        <button id="btn_professores" type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#cadastro-usuario">Gerar Relatório</button>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
 </body>
