@@ -86,10 +86,10 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais que de
 |RF-03|**Gerenciamento de Turmas**: O sistema deve permitir que o secretário aloque alunos e professores em turmas e disciplinas. | Média      |
 |RF-04|**Registro de Notas**: O sistema deve permitir que professores registrem e alterem as notas dos alunos. | Alta       |
 |RF-05|**Controle de Frequência**: O sistema deve permitir que professores marquem a presença dos alunos nas aulas. | Alta       |
-|RF-06|**Postagem do Calendário**: O sistema deve permitir que o professor monte um calendário com as datas de aulas, provas e eventos acadêmicos. | Média      |
+|RF-06|**Postagem das Obrigações**: O sistema deve permitir que o professor monte uma lista com as datas de aulas, provas e eventos acadêmicos. | Média      |
 |RF-07|**Portal do Professor**: O sistema deve permitir que professores acessem e emitam os relatórios de notas e de frequência dos alunos. | Alta       |
 |RF-08|**Postagem de Aulas**: O sistema deve permitir que professores enviem as aulas disponibilizadas pelos mesmos. | Alta       |
-|RF-09|**Visualização do Calendário**: O sistema deve permitir que alunos vejam o calendário com as datas de aulas, provas e eventos acadêmicos. | Alta       |
+|RF-09|**Visualização das Obrigações**: O sistema deve permitir que alunos vejam as datas de aulas, provas e eventos acadêmicos. | Alta       |
 |RF-10|**Portal do Aluno**: O sistema deve permitir que alunos vejam as suas notas, horários de aula e histórico escolar. | Alta       |
 |RF-11|**Envio de Notificações**: O sistema deve enviar notificações aos usuários sobre eventos, como provas e alterações nas aulas. | Alta       |
 |RF-12|**Portal Principal**: O sistema deve permitir que qualquer pessoa veja as informações sobre a instituição, bolsas, grades curriculares, professores e currículo acadêmico. | Baixa      |
@@ -119,15 +119,4 @@ O projeto está restrito aos itens apresentados na tabela a seguir.
 |001| O projeto deverá ser entregue até o final do semestre |
 |002| O custo total do projeto não deve exceder o orçamento definido       |
 
-## Diagrama de casos de uso
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos. Ele utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. O diagrama contempla a fronteira do sistema e o detalhamento dos requisitos funcionais, com a indicação dos atores, casos de uso e seus relacionamentos.
-
-As referências abaixo irão auxiliá-lo na geração do artefato “diagrama de casos de uso”.
-
-> **Links úteis**:
-> - [Criando casos de uso](https://www.ibm.com/docs/pt-br/engineering-lifecycle-management-suite/design-rhapsody/10.0?topic=cases-creating-use)
-> - [Como criar diagrama de caso de uso: tutorial passo a passo](https://gitmind.com/pt/fazer-diagrama-de-caso-uso.html/)
-> - [Lucidchart](https://www.lucidchart.com/)
-> - [Astah](https://astah.net/)
-> - [Diagrams](https://app.diagrams.net/)
