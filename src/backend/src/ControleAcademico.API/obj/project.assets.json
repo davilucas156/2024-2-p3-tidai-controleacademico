@@ -504,6 +504,31 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "ControleAcademico.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "ControleAcademico.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.10",
+          "Pomelo.EntityFrameworkCore.MySql": "7.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ControleAcademico.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ControleAcademico.Data.dll": {}
+        }
+      },
+      "ControleAcademico.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/ControleAcademico.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ControleAcademico.Domain.dll": {}
+        }
       }
     }
   },
@@ -1487,10 +1512,22 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "ControleAcademico.Data/1.0.0": {
+      "type": "project",
+      "path": "../ControleAcademico.Data/ControleAcademico.Data.csproj",
+      "msbuildProject": "../ControleAcademico.Data/ControleAcademico.Data.csproj"
+    },
+    "ControleAcademico.Domain/1.0.0": {
+      "type": "project",
+      "path": "../ControleAcademico.Domain/ControleAcademico.Domain.csproj",
+      "msbuildProject": "../ControleAcademico.Domain/ControleAcademico.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "ControleAcademico.Data >= 1.0.0",
+      "ControleAcademico.Domain >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.10",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.10",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.10",
@@ -1530,7 +1567,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.Data\\ControleAcademico.Data.csproj": {
+              "projectPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.Data\\ControleAcademico.Data.csproj"
+            },
+            "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.Domain\\ControleAcademico.Domain.csproj": {
+              "projectPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.Domain\\ControleAcademico.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

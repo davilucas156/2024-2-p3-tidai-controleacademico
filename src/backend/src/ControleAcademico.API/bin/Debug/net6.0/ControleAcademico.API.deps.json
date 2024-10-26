@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "ControleAcademico.API/1.0.0": {
         "dependencies": {
+          "ControleAcademico.Data": "1.0.0",
+          "ControleAcademico.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.10",
           "Microsoft.EntityFrameworkCore.Design": "7.0.10",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.10",
@@ -311,6 +313,21 @@
             "fileVersion": "7.0.22.51805"
           }
         }
+      },
+      "ControleAcademico.Data/1.0.0": {
+        "dependencies": {
+          "ControleAcademico.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "7.0.10",
+          "Pomelo.EntityFrameworkCore.MySql": "7.0.0"
+        },
+        "runtime": {
+          "ControleAcademico.Data.dll": {}
+        }
+      },
+      "ControleAcademico.Domain/1.0.0": {
+        "runtime": {
+          "ControleAcademico.Domain.dll": {}
+        }
       }
     }
   },
@@ -529,6 +546,16 @@
       "sha512": "sha512-DaGSsVqKsn/ia6RG8frjwmJonfos0srquhw09TlT8KRw5I43E+4gs+/bZj4K0vShJ5H9imCuXupb4RmS+dBy3w==",
       "path": "system.text.json/7.0.0",
       "hashPath": "system.text.json.7.0.0.nupkg.sha512"
+    },
+    "ControleAcademico.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ControleAcademico.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

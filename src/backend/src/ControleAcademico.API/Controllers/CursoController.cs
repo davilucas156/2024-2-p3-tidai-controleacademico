@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ControleAcademico.Data.Context;
+using ControleAcademico.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-
-using ControleAcademico.API.Model;
 
 namespace ControleAcademico.API.Controllers
 {

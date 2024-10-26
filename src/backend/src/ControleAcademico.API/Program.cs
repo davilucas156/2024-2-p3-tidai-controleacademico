@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using ControleAcademico.API.Model;
+using ControleAcademico.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

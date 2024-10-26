@@ -20,4 +20,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ControleAcademico.Data\ControleAcademico.Data.csproj" />
+    <ProjectReference Include="..\ControleAcademico.Domain\ControleAcademico.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
