@@ -5,14 +5,8 @@ namespace ControleAcademico.API.Model;
 
 public partial class ControleAcademicoContext : DbContext
 {
-    public ControleAcademicoContext()
-    {
-    }
-
-    public ControleAcademicoContext(DbContextOptions<ControleAcademicoContext> options)
-        : base(options)
-    {
-    }
+    public ControleAcademicoContext() { }
+    public ControleAcademicoContext(DbContextOptions<ControleAcademicoContext> options) : base(options) {  }
 
     public virtual DbSet<Curso> Cursos { get; set; }
 
