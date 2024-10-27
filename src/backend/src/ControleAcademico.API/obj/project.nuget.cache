@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UvnpWfR/vP4CNcQ4GhQlurHZOXiuL93ib/8OrvZT5IHMYZWacaY/DyRzvhs+FR0O1JxH8nUu/bhN+xor9ilAzw==",
+  "dgSpecHash": "kKecMjgbrAjPbGTjzagN/NZUBoXa/gskasWpEb+3t8fEAflw8hM06vPVEnGy1Nu3OGQgOyTtGMW/xreMpLoh9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.api\\ControleAcademico.API.csproj",
+  "projectFilePath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.API\\ControleAcademico.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pedro\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\pedro\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.10\\microsoft.entityframeworkcore.7.0.10.nupkg.sha512",

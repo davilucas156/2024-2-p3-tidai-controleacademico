@@ -11,7 +11,7 @@ public partial class Curso
 
     public Niveis Nivel { get; set; }
 
-    public Tipos Tipo { get; set; }
+    public TiposCurso Tipo { get; set; }
 
     public virtual ICollection<Disciplina> Disciplinas { get; set; } = new List<Disciplina>();
 
@@ -22,8 +22,9 @@ public partial class Curso
 
 
     // Construtor com parâmetros
-    public Curso(string? nome, Niveis nivel, Tipos tipo)
+    public Curso(int idCursos, string? nome, Niveis nivel, TiposCurso tipo)
     {
+        IdCursos = idCursos;
         Nome = nome;
         Nivel = nivel;
         Tipo = tipo;
@@ -31,7 +32,7 @@ public partial class Curso
         Usuarios = new List<Usuario>();       // Inicializa a coleção
     }
 
-    public enum Tipos
+    public enum TiposCurso
     {
         Presencial,
         Ead,

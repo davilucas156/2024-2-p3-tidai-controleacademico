@@ -17,4 +17,16 @@ public partial class Disciplina
     public virtual ICollection<MaterialDisciplina> MaterialDisciplinas { get; set; } = new List<MaterialDisciplina>();
 
     public virtual ICollection<TarefasDisciplina> TarefasDisciplinas { get; set; } = new List<TarefasDisciplina>();
+
+    public Disciplina(){}
+    public Disciplina(int idDisciplinas, string? nome, int? semestre, int idCurso, Curso idCursoNavigation)
+    {
+        IdDisciplinas = idDisciplinas;
+        Nome = nome;
+        Semestre = semestre;
+        IdCurso = idCurso;
+        IdCursoNavigation = idCursoNavigation;
+        MaterialDisciplinas = new List<MaterialDisciplina>();
+        TarefasDisciplinas = new List<TarefasDisciplina>();
+    }
 }

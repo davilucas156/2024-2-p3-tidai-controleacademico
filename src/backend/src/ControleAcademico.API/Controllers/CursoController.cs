@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ControleAcademico.Data.Context;
 using ControleAcademico.Domain.Entities;
+using ControleAcademico.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using static ControleAcademico.Domain.Entities.Curso;
 
 namespace ControleAcademico.API.Controllers
 {
@@ -12,55 +13,110 @@ namespace ControleAcademico.API.Controllers
     [Route("api/[controller]")]
     public class CursoController : ControllerBase
     {
-        private readonly ControleAcademicoContext _context;
-        public CursoController(ControleAcademicoContext context)
+        private readonly ICursoService _CursoService;
+        public CursoController(ICursoService CursoService)
         {
-            this._context = context;
-            
+            _CursoService = CursoService;
         }
+
 
         [HttpGet]
-        public IEnumerable<Curso> GetCursos(){
-            return _context.Cursos;
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var cursos = await _CursoService.PegarTodosCursoAsynk();
+                if (cursos == null) return NoContent();
+
+                return Ok(cursos);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Atividades. Erro: {ex.Message}");
+            }
         }
 
-        [HttpGet("{id}")]
-        public Curso GetCursos( int id){
-            return _context.Cursos.FirstOrDefault(aux=>aux.IdCursos==id);
-        }
+        [HttpGet("filtrados")]
+        public async Task<IActionResult> GetCursosFiltrados(int? id = null, string? nome = null, TiposCurso? tipo = null, Niveis? nivel = null)
+        {
+            try
+            {
+                var cursos = await _CursoService.PegarCursoPorTudo(id, nome, tipo, nivel);
+                if (cursos == null || cursos.Length == 0) return NoContent();
 
+                return Ok(cursos);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar cursos com filtros aplicados. Erro: {ex.Message}");
+            }
+        }
 
         [HttpPost]
-        public IEnumerable<Curso> postCursos(Curso curso){
-            _context.Cursos.Add(curso);
-            if(_context.SaveChanges() > 0)
-                return _context.Cursos;
-            else
-                throw new Exception("A inclusão não foi realizada");
+        public async Task<IActionResult> PostCurso(Curso model)
+        {
+            try
+            {
+                var atividade = await _CursoService.AdicionarCurso(model);
+                if (atividade == null) return NoContent();
+
+                return Ok(atividade);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar Adicionar Atividades. Erro: {ex.Message}");
+            }
         }
 
-        [HttpPut("{id}")]
-        public Curso PutCursos( int id, Curso curso){
-            if(curso.IdCursos != id) throw new Exception ("Você  está tentadno atualizar a atividade errada");
-            _context.Update(curso);
+[HttpPut("{id}")]
+public async Task<IActionResult> PutCurso(int id, Curso model)
+{
+    try
+    {
+        if (model.IdCursos != id)
+            return this.StatusCode(StatusCodes.Status409Conflict,
+                "Você está tentando atualizar a atividade errada");
 
-            if(_context.SaveChanges() > 0)
-                return _context.Cursos.FirstOrDefault(aux=>aux.IdCursos==id);
-            else 
-                return new Curso();
-        }
+        var atividade = await _CursoService.AtualizarCurso(model);
+        if (atividade == null) return NoContent();
+
+        return Ok(atividade);
+    }
+    catch (System.Exception ex)
+    {
+        return this.StatusCode(StatusCodes.Status500InternalServerError,
+            $"Erro ao tentar Atualizar Atividade com id: {id}. Erro: {ex.Message}");
+    }
+}
 
 
         [HttpDelete("{id}")]
-        public bool DeleteCursos( int id){
-            var curso= _context.Cursos.FirstOrDefault(aux=>aux.IdCursos==id);
-            if(curso==null)
-                throw new Exception ("Voce está tentando deletar um curso que não existe");
-            
-            _context.Remove(curso);
+        public async Task<IActionResult> DeleteCursos(int id)
+        {
+            try
+            {
+                var atividade = await _CursoService.PegarCursoPorTudo(id: id);
+                if (atividade == null)
+                    this.StatusCode(StatusCodes.Status409Conflict,
+                        "Você está tentando deletar a atividade que não existe");
 
-            return _context.SaveChanges() > 0;
+                if (await _CursoService.DeletarCurso(id))
+                {
+                    return Ok(new { message = "Deletado" });
+                }
+                else
+                {
+                    return BadRequest("Ocorreu um problema não específico ao tentar deletar a atividade.");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar deletar Atividade com id: ${id}. Erro: {ex.Message}");
+            }
         }
-
     }
 }

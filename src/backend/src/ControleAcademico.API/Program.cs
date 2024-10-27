@@ -1,15 +1,12 @@
 using System.Text.Json.Serialization;
 using ControleAcademico.Data.Context;
+using ControleAcademico.Data.Repositories;
+using ControleAcademico.Domain.Interfaces.Repositories;
+using ControleAcademico.Domain.Interfaces.Services;
+using ControleAcademico.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
 
 // Configuring Context
 builder.Services.AddDbContext<ControleAcademicoContext>(options =>
@@ -18,6 +15,19 @@ builder.Services.AddDbContext<ControleAcademicoContext>(options =>
         new MySqlServerVersion(new Version(8, 0, 25)) // Substitua pela versão do MySQL que você está usando
     )
 );
+
+builder.Services.AddScoped<IgeralRepo, GeralRepo>();
+
+builder.Services.AddScoped<ICursoRepo, CursoRepo>();
+builder.Services.AddScoped<ICursoService, CursoService>();
+
+
+// Add services to the container.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

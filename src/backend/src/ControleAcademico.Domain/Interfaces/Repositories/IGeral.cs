@@ -12,7 +12,7 @@ namespace ControleAcademico.Domain.Interfaces.Repositories
         void Deletar<T>(T entity) where T : class;        
         void DeletarVárias<T>(T[] entity) where T : class;      
 
-        Task<bool> SalvarMudançaAsync();
+        Task<bool> SalvarMudancaAsync();
   
     }
 }

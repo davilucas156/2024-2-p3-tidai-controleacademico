@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.api\\ControleAcademico.API.csproj": {}
+    "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.API\\ControleAcademico.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.api\\ControleAcademico.API.csproj": {
+    "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.API\\ControleAcademico.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.api\\ControleAcademico.API.csproj",
+        "projectUniqueName": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.API\\ControleAcademico.API.csproj",
         "projectName": "ControleAcademico.API",
-        "projectPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.api\\ControleAcademico.API.csproj",
+        "projectPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.API\\ControleAcademico.API.csproj",
         "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.api\\obj\\",
+        "outputPath": "C:\\Users\\pedro\\OneDrive\\Documentos\\Teste\\2024-2-p3-tidai-controleacademico\\src\\backend\\src\\ControleAcademico.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
