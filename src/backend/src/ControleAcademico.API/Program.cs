@@ -27,6 +27,18 @@ builder.Services.AddScoped<IMaterialDisciplinaService, MaterialDisciplinaService
 builder.Services.AddScoped<ITarefasDisciplinaRepo, TarefaDisciplinaRepo>();
 builder.Services.AddScoped<ITarefaDisciplinaService, TarefaDisciplinaService>();
 
+builder.Services.AddScoped<INotasTarefasRepo, NotasTarefasRepo>();
+builder.Services.AddScoped<INotasTarefasService, NotasTarefasService>();
+
+builder.Services.AddScoped<IPresencaRepo, PresencaRepo>();
+builder.Services.AddScoped<IPresencaService, PresencaService>();
+
+builder.Services.AddScoped<IRelacionamentoUsuarioDisciplinaRepo, RelacionamentoRepo>();
+builder.Services.AddScoped<IRelacionamentoUsuarioDisciplinaService, RelacionamentoUsuarioDisciplinaService>();
+
+builder.Services.AddScoped<IUsuarioRepo, UsuarioRepo>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 
 // Configurando CORS
 builder.Services.AddCors(options =>
