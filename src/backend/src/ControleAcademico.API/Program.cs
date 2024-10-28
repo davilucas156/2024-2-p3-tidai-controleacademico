@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuring Context
+// Configurando o Contexto do banco de dados
 builder.Services.AddDbContext<ControleAcademicoContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("Default"),
@@ -16,25 +16,45 @@ builder.Services.AddDbContext<ControleAcademicoContext>(options =>
     )
 );
 
+// Adicionando os repositórios e serviços
 builder.Services.AddScoped<IgeralRepo, GeralRepo>();
-
 builder.Services.AddScoped<ICursoRepo, CursoRepo>();
 builder.Services.AddScoped<ICursoService, CursoService>();
+builder.Services.AddScoped<IDisciplinaRepo, DisciplinaRepo>();
+builder.Services.AddScoped<IDisciplinaService, DisciplinaService>();
+builder.Services.AddScoped<IMaterialDisciplinaRepo, MaterialDisciplinaRepo>();
+builder.Services.AddScoped<IMaterialDisciplinaService, MaterialDisciplinaService>();
+builder.Services.AddScoped<ITarefasDisciplinaRepo, TarefaDisciplinaRepo>();
+builder.Services.AddScoped<ITarefaDisciplinaService, TarefaDisciplinaService>();
 
 
-// Add services to the container.
+// Configurando CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin() // Permite qualquer origem
+                   .AllowAnyMethod() // Permite qualquer método (GET, POST, etc.)
+                   .AllowAnyHeader(); // Permite qualquer cabeçalho
+        });
+});
+
+// Configurando os controllers e as opções de JSON
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
+// Adicionando o Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configurar o pipeline de requisições
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -46,6 +66,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll"); // Adicionando o uso da política de CORS
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

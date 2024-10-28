@@ -24,6 +24,7 @@ namespace ControleAcademico.Data.Repositories
 
             query = query
                         .AsNoTracking()
+                        .Include(c => c.Disciplinas)
                         .OrderBy(ativ => ativ.IdCursos);
 
             return await query.ToArrayAsync();

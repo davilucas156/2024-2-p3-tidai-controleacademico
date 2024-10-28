@@ -22,7 +22,8 @@ public partial class Curso
 
 
     // Construtor com parâmetros
-    public Curso(int idCursos, string? nome, Niveis nivel, TiposCurso tipo)
+    public Curso(int idCursos, string? nome, Niveis nivel, TiposCurso tipo,
+                        ICollection<Disciplina>? Disciplinas = null) 
     {
         IdCursos = idCursos;
         Nome = nome;

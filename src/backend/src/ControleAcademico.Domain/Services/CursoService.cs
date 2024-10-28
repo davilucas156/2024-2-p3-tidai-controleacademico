@@ -10,9 +10,10 @@ using static ControleAcademico.Domain.Entities.Curso;
 namespace ControleAcademico.Domain.Services
 {
     public class CursoService : ICursoService
-    {
+        {
         private readonly ICursoRepo _cursoRepo;
-        public CursoService(ICursoRepo cursoRepo)
+
+        public CursoService(ICursoRepo cursoRepo) // Atualize o construtor
         {
             this._cursoRepo = cursoRepo;
         }
@@ -25,6 +26,7 @@ namespace ControleAcademico.Domain.Services
 
             // Adiciona o novo curso
             _cursoRepo.Adicionar(model);
+
             if (await _cursoRepo.SalvarMudancaAsync())
                 return model;
 

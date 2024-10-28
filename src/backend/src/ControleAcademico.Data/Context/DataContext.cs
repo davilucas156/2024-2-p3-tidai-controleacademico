@@ -106,10 +106,15 @@ public partial class ControleAcademicoContext : DbContext
 
             entity.HasIndex(e => e.IdDisciplinas, "fk_material_disciplina_disciplinas");
 
-            entity.Property(e => e.IdMateria)
-                .HasMaxLength(45)
+            entity.Property(e => e.IdMateria) // Ajustado para int
+                .ValueGeneratedNever()
                 .HasColumnName("id_materia");
-            entity.Property(e => e.Descricao).HasColumnName("descricao");
+                
+            // Atualize o mapeamento de Descricao para string com um tamanho máximo
+            entity.Property(e => e.Descricao)
+                .HasMaxLength(255) // ajuste o tamanho conforme necessário
+                .HasColumnName("descricao");
+
             entity.Property(e => e.IdDisciplinas).HasColumnName("id_disciplinas");
             entity.Property(e => e.LinkVideoaula)
                 .HasMaxLength(1000)

@@ -21,4 +21,19 @@ public partial class TarefasDisciplina
     public virtual Disciplina IdDisciplinasNavigation { get; set; } = null!;
 
     public virtual ICollection<NotasTarefa> NotasTarefas { get; set; } = new List<NotasTarefa>();
+
+    // Construtor sem parâmetros
+    public TarefasDisciplina() { }
+
+    // Construtor com todos os parâmetros
+    public TarefasDisciplina(int idTarefa, string? modulo, string? titulo, int? valor, DateOnly? dataEntrega, string? linkArquivoTarefa, int idDisciplinas)
+    {
+        IdTarefa = idTarefa;
+        Modulo = modulo;
+        Titulo = titulo;
+        Valor = valor;
+        DataEntrega = dataEntrega;
+        LinkArquivoTarefa = linkArquivoTarefa;
+        IdDisciplinas = idDisciplinas;
+    }
 }
