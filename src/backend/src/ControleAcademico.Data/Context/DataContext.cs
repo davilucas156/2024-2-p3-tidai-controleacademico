@@ -130,43 +130,48 @@ public partial class ControleAcademicoContext : DbContext
                 .HasConstraintName("fk_material_disciplina_disciplinas");
         });
 
-        modelBuilder.Entity<NotasTarefa>(entity =>
-        {
-            entity.HasKey(e => new { e.Matricula, e.IdTarefa })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+modelBuilder.Entity<NotasTarefa>(entity =>
+{
+    // Definindo uma chave composta como chave primária
+    entity.HasKey(e => new { e.Matricula, e.IdTarefa })
+        .HasName("PRIMARY")
+        .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-            entity.ToTable("notas_tarefas");
+    entity.ToTable("notas_tarefas");
 
-            entity.HasIndex(e => e.IdTarefa, "fk_notas_tarefas_tarefas_disciplina");
+    entity.HasIndex(e => e.IdTarefa, "fk_notas_tarefas_tarefas_disciplina");
 
-            entity.Property(e => e.Matricula).HasColumnName("matricula");
-            entity.Property(e => e.IdTarefa).HasColumnName("id_tarefa");
-            entity.Property(e => e.Nota).HasColumnName("nota");
+    entity.Property(e => e.Matricula).HasColumnName("matricula");
+    entity.Property(e => e.IdTarefa).HasColumnName("id_tarefa");
+    entity.Property(e => e.Nota).HasColumnName("nota");
 
-            entity.HasOne(d => d.IdTarefaNavigation).WithMany(p => p.NotasTarefas)
-                .HasForeignKey(d => d.IdTarefa)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_notas_tarefas_tarefas_disciplina");
+    entity.HasOne(d => d.IdTarefaNavigation).WithMany(p => p.NotasTarefas)
+        .HasForeignKey(d => d.IdTarefa)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("fk_notas_tarefas_tarefas_disciplina");
 
-            entity.HasOne(d => d.MatriculaNavigation).WithMany(p => p.NotasTarefas)
-                .HasForeignKey(d => d.Matricula)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_notas_tarefas_usuarios");
-        });
+    entity.HasOne(d => d.MatriculaNavigation).WithMany(p => p.NotasTarefas)
+        .HasForeignKey(d => d.Matricula)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("fk_notas_tarefas_usuarios");
+});
 
-        modelBuilder.Entity<Presenca>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("presenca");
+modelBuilder.Entity<Presenca>(entity =>
+{
+    // Adicionando uma chave primária à entidade `Presenca`
+    entity.HasKey(e => e.IdPresenca) // Certifique-se de que a entidade possui a propriedade IdPresenca
+        .HasName("PRIMARY");
 
-            entity.HasIndex(e => e.IdDisciplinasUsuario, "fk_presenca_disciplinas_usuario");
+    entity.ToTable("presenca");
 
-            entity.Property(e => e.Data).HasColumnName("data");
-            entity.Property(e => e.IdDisciplinasUsuario).HasColumnName("id_disciplinas_usuario");
-            entity.Property(e => e.Presenca1).HasColumnName("presenca");
-        });
+    entity.HasIndex(e => e.IdDisciplinasUsuario, "fk_presenca_disciplinas_usuario");
+
+    entity.Property(e => e.IdPresenca).HasColumnName("id_presenca"); // Definindo a coluna no banco de dados para o campo IdPresenca
+    entity.Property(e => e.Data).HasColumnName("data");
+    entity.Property(e => e.IdDisciplinasUsuario).HasColumnName("id_disciplinas_usuario");
+    entity.Property(e => e.Presenca1).HasColumnName("presenca");
+});
+
 
         modelBuilder.Entity<TarefasDisciplina>(entity =>
         {

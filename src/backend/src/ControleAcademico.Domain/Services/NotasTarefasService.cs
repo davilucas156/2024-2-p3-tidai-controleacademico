@@ -16,16 +16,23 @@ namespace ControleAcademico.Domain.Services
             _NotasTarefasRepo = NotasTarefasRepo;
         }
 
-        public async Task<NotasTarefa> AdicionarNotas(NotasTarefa model)
-        {
-            // Adiciona a nova nota
-            _NotasTarefasRepo.Adicionar(model);
+public async Task<NotasTarefa> AdicionarNotas(NotasTarefa model)
+{
+    try
+    {
+        _NotasTarefasRepo.Adicionar(model);
 
-            if (await _NotasTarefasRepo.SalvarMudancaAsync())
-                return model;
+        if (await _NotasTarefasRepo.SalvarMudancaAsync())
+            return model;
 
-            throw new Exception("Erro ao salvar a nota.");
-        }
+        throw new Exception("Erro ao salvar a nota.");
+    }
+    catch (Exception ex)
+    {
+        throw new Exception($"Erro ao adicionar nota. Erro: {ex.InnerException?.Message ?? ex.Message}");
+    }
+}
+
 
         public async Task<NotasTarefa> AtualizarNotas(NotasTarefa model)
         {
