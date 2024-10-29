@@ -8,94 +8,87 @@ using ControleAcademico.Domain.Interfaces.Services;
 
 namespace ControleAcademico.Domain.Services
 {
-    public class TarefaDisciplinaService : ITarefaDisciplinaService
+public class TarefaDisciplinaService : ITarefaDisciplinaService
+{
+    private readonly IDisciplinaRepo _disciplinaRepo;
+    private readonly ITarefasDisciplinaRepo _tarefaRepo;
+
+    public TarefaDisciplinaService(ITarefasDisciplinaRepo tarefaRepo, IDisciplinaRepo disciplinaRepo)
     {
-        private readonly IDisciplinaRepo _disciplinaRepo;
-        private readonly ITarefasDisciplinaRepo _TarefaRepo;
-        public TarefaDisciplinaService(ITarefasDisciplinaRepo TarefaRepo, IDisciplinaRepo disciplinaRepo)
+        _disciplinaRepo = disciplinaRepo;
+        _tarefaRepo = tarefaRepo;
+    }
+
+    public async Task<TarefasDisciplina> AdicionarTarefa(TarefasDisciplina model)
+    {
+        var tarefasComMesmoTitulo = await _tarefaRepo.PegarTarefaPorTudoAsync(titulo: model.Titulo);
+        if (tarefasComMesmoTitulo.FirstOrDefault() != null)
+            throw new InvalidOperationException("Já existe uma tarefa com esse título.");
+
+        var disciplinaExistente = await _disciplinaRepo.PegarDisciplinaPorTudoAsync(id: model.IdDisciplinas);
+        if (disciplinaExistente.FirstOrDefault() == null)
+            throw new InvalidOperationException("Disciplina inexistente.");
+
+        _tarefaRepo.Adicionar(model);
+        if (await _tarefaRepo.SalvarMudancaAsync())
+            return model;
+
+        throw new Exception("Erro ao salvar a tarefa.");
+    }
+
+    public async Task<TarefasDisciplina> AtualizarTarefa(TarefasDisciplina model)
+    {
+        if (model.IdTarefa <= 0)
+            throw new ArgumentException("ID do material é inválido.");
+
+        var materialExistente = await _tarefaRepo.PegarTarefaPorTudoAsync(idTarefa: model.IdTarefa);
+        if (materialExistente.FirstOrDefault() == null)
+            throw new InvalidOperationException("Material inexistente.");
+
+        _tarefaRepo.Atualizar(model);
+        if (await _tarefaRepo.SalvarMudancaAsync())
+            return model;
+
+        throw new Exception("Erro ao atualizar o material.");
+    }
+
+    public async Task<bool> DeletarTarefa(int IdTarefa)
+    {
+        var tarefas = await _tarefaRepo.PegarTarefaPorTudoAsync(idTarefa: IdTarefa);
+        var tarefa = tarefas.FirstOrDefault();
+
+        if (tarefa == null) 
+            throw new Exception("Tarefa que tentou deletar não existe");
+
+        _tarefaRepo.Deletar(tarefa);
+        return await _tarefaRepo.SalvarMudancaAsync();
+    }
+
+    public async Task<TarefasDisciplina[]> PegarTarefaPorTudo(int? idTarefa = null, string? modulo = null, string? titulo = null, int? valor = null, DateOnly? dataEntrega = null, string? linkArquivoTarefa = null, int? idDisciplinas = null)
+    {
+        try
         {
-            _disciplinaRepo = disciplinaRepo;
-            _TarefaRepo = TarefaRepo;
+            var tarefas = await _tarefaRepo.PegarTarefaPorTudoAsync(idTarefa, modulo, titulo, valor, dataEntrega, linkArquivoTarefa, idDisciplinas);
+            return tarefas ?? Array.Empty<TarefasDisciplina>(); // Retorna uma lista vazia se for nulo
         }
-
-        public async Task<TarefasDisciplina> AdicionarTarefa(TarefasDisciplina model)
+        catch (Exception ex)
         {
-            // Verifica se já existe um curso com o mesmo nome
-            var disciplinasComMesmoNome = await _TarefaRepo.PegarTarefaPorTudoAsync(titulo: model.Titulo);
-            if (disciplinasComMesmoNome.FirstOrDefault() != null)
-                throw new InvalidOperationException("Já existe um curso com esse nome.");
-
-            var disciplinasComCurso = await _disciplinaRepo.PegarDisciplinaPorTudoAsync(id: model.IdDisciplinas);
-            if (disciplinasComCurso.FirstOrDefault() != null) // se exitir a disciplina
-            {
-                // Adiciona o novo curso
-                _TarefaRepo.Adicionar(model);
-                if (await _TarefaRepo.SalvarMudancaAsync())
-                    return model;
-            }
-            throw new Exception("Erro ao salvar o curso.");
-        }
-
-        public async Task<TarefasDisciplina> AtualizarTarefa(TarefasDisciplina model)
-        {
-            if (model.IdDisciplinas <= 0)
-                throw new ArgumentException("ID do curso é inválido.");
-
-            // Verifica se o curso existe
-            var cursoExistente = await _TarefaRepo.PegarTarefaPorTudoAsync(idTarefa: model.IdTarefa);
-            var curso = cursoExistente.FirstOrDefault();
-            if (curso == null)
-                throw new InvalidOperationException("Curso inexistente.");
-
-            // Atualiza o curso
-            _TarefaRepo.Atualizar(model);
-            if (await _TarefaRepo.SalvarMudancaAsync())
-                return model;
-
-            throw new Exception("Erro ao atualizar o curso.");
-        }
-
-        public async Task<bool> DeletarTarefa(int IdTarefa)
-        {
-            {
-                var disciplinas = await _TarefaRepo.PegarTarefaPorTudoAsync(idTarefa: IdTarefa);
-                var curso = disciplinas.FirstOrDefault(); // Obter o primeiro curso encontrado
-
-                if (curso == null) throw new Exception("Curso que tentou deletar não existe");
-
-                _TarefaRepo.Deletar(curso);
-                return await _TarefaRepo.SalvarMudancaAsync();
-            }
-        }
-
-        public async Task<TarefasDisciplina[]> PegarTarefaPorTudo(int? idTarefa = null, string? modulo = null, string? titulo = null, int? valor = null, DateOnly? dataEntrega = null, string? linkArquivoTarefa = null, int? idDisciplinas = null)
-        {
-            try
-            {
-                var curso = await _TarefaRepo.PegarTarefaPorTudoAsync(idTarefa, modulo,titulo, valor, dataEntrega, linkArquivoTarefa, idDisciplinas);
-                if (curso == null) return null;
-
-                return curso;
-            }
-            catch (System.Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public async Task<TarefasDisciplina[]> PegarTodosTarefaAsynk()
-        {
-            try
-            {
-                var disciplinas = await _TarefaRepo.PegarTodasAsync();
-                if (disciplinas == null) return null;
-
-                return disciplinas;
-            }
-            catch (System.Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            throw new Exception($"Erro ao processar a requisição: {ex.Message}");
         }
     }
+
+    public async Task<TarefasDisciplina[]> PegarTodosTarefaAsynk()
+    {
+        try
+        {
+            var tarefas = await _tarefaRepo.PegarTodasAsync();
+            return tarefas ?? Array.Empty<TarefasDisciplina>(); // Retorna uma lista vazia se for nulo
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao processar a requisição: {ex.Message}");
+        }
+    }
+}
+
 }

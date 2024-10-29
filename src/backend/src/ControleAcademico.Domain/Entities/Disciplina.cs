@@ -9,7 +9,7 @@ public partial class Disciplina
     public int? Semestre { get; set; }
     public int IdCurso { get; set; }
 
-    public virtual Curso IdCursoNavigation { get; set; } = null!;
+    public virtual Curso? IdCursoNavigation { get; set; } = null!;
 
     public virtual ICollection<MaterialDisciplina> MaterialDisciplinas { get; set; } = new List<MaterialDisciplina>();
     public virtual ICollection<TarefasDisciplina> TarefasDisciplinas { get; set; } = new List<TarefasDisciplina>();

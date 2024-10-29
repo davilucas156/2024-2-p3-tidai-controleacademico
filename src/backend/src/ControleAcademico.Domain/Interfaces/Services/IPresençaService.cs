@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ControleAcademico.Domain.Entities;
 using static ControleAcademico.Domain.Entities.Disciplina;
+using static ControleAcademico.Domain.Entities.Presenca;
 
 
 namespace ControleAcademico.Domain.Interfaces.Services
@@ -14,6 +15,6 @@ namespace ControleAcademico.Domain.Interfaces.Services
         Task<Presenca> AtualizarPresenca(Presenca model);
         Task<bool> DeletarPresenca(int IdPresenca);
         Task<Presenca[]> PegarTodosPresencaAsynk();
-        Task<Presenca[]> PegarPresencaPorTudo(DateOnly? data=null, int? presenca=null, int? idDisciplinasUsuario=null);
+        Task<Presenca[]> PegarPresencaPorTudo(DateOnly? data=null, Presença? presenca=null, int? idDisciplinasUsuario=null);
     }
 }

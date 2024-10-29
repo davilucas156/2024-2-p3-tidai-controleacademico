@@ -13,7 +13,7 @@ public partial class Usuario
     public string? Senha { get; set; }
     public int IdCurso { get; set; }
 
-    public virtual Curso IdCursoNavigation { get; set; } = null!;
+    public virtual Curso? IdCursoNavigation { get; set; } = null!;
     public virtual ICollection<NotasTarefa> NotasTarefas { get; set; } = new List<NotasTarefa>();
 
     public enum Tipos

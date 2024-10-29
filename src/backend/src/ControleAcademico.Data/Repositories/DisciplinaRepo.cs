@@ -29,7 +29,7 @@ namespace ControleAcademico.Data.Repositories
             return await query.ToArrayAsync();
         }
 
-        public async Task<Disciplina[]> PegarDisciplinaPorTudoAsync(int? id, string? nome, int? semestre, Curso? idCursoNavigation)
+        public async Task<Disciplina[]> PegarDisciplinaPorTudoAsync(int? id, string? nome, int? semestre, int?IdCurso, Curso? idCursoNavigation)
         {
             IQueryable<Disciplina> query = _context.Disciplinas.AsNoTracking().OrderBy(curso => curso.IdDisciplinas);
 
@@ -42,6 +42,9 @@ namespace ControleAcademico.Data.Repositories
                 
             if (semestre.HasValue)
                 query = query.Where(curso => curso.Semestre == semestre);
+
+            if (IdCurso != null)
+                query = query.Where(curso => curso.IdCurso == IdCurso);
 
             if (idCursoNavigation != null)
                 query = query.Where(curso => curso.IdCursoNavigation == idCursoNavigation);

@@ -14,6 +14,6 @@ namespace ControleAcademico.Domain.Interfaces.Services
         Task<Disciplina> AtualizarDisciplina(Disciplina model);
         Task<bool> DeletarDisciplina(int IdDisciplina);
         Task<Disciplina[]> PegarTodosDisciplinaAsynk();
-        Task<Disciplina[]> PegarDisciplinaPorTudo(int? id= null, string? nome= null, int? semestre= null, Curso? idCursoNavigation=null);
+        Task<Disciplina[]> PegarDisciplinaPorTudo(int? id= null, string? nome= null, int? semestre= null, int?IdCurso=null, Curso? idCursoNavigation=null);
     }
 }

@@ -10,6 +10,6 @@ namespace ControleAcademico.Domain.Interfaces.Repositories
     public interface IDisciplinaRepo : IgeralRepo
     {
         Task<Disciplina[]> PegarTodasAsync();
-        Task<Disciplina[]> PegarDisciplinaPorTudoAsync(int? id= null, string? nome= null, int? semestre= null, Curso? idCursoNavigation=null);
+        Task<Disciplina[]> PegarDisciplinaPorTudoAsync(int? id= null, string? nome= null, int? semestre= null, int?IdCurso=null, Curso? idCursoNavigation=null);
     }
 }

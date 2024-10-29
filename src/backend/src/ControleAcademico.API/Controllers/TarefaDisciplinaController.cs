@@ -55,25 +55,25 @@ namespace ControleAcademico.API.Controllers
         }
 
 [HttpPut("{id}")]
-public async Task<IActionResult> PutCurso(int id, TarefasDisciplina model)
+public async Task<IActionResult> PutTarefaDisciplina(int id, TarefasDisciplina model)
 {
     try
     {
-        if (model.IdDisciplinas != id)
-            return this.StatusCode(StatusCodes.Status409Conflict,
-                "Você está tentando atualizar a atividade errada");
+        if (model.IdTarefa != id)
+            return this.StatusCode(StatusCodes.Status409Conflict, "Você está tentando atualizar a atividade errada.");
 
-        var atividade = await _TarefaDisciplinaService.AtualizarTarefa(model);
-        if (atividade == null) return NoContent();
+        var tarefaAtualizada = await _TarefaDisciplinaService.AtualizarTarefa(model);
+        if (tarefaAtualizada == null) return NoContent();
 
-        return Ok(atividade);
+        return Ok(tarefaAtualizada);
     }
     catch (System.Exception ex)
     {
         return this.StatusCode(StatusCodes.Status500InternalServerError,
-            $"Erro ao tentar Atualizar Atividade com id: {id}. Erro: {ex.Message}");
+            $"Erro ao tentar atualizar a tarefa com id: {id}. Erro: {ex.Message}");
     }
 }
+
 
 
         [HttpDelete("{id}")]

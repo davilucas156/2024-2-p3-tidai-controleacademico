@@ -5,6 +5,7 @@ using ControleAcademico.Data.Context;
 using ControleAcademico.Domain.Entities;
 using ControleAcademico.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using static ControleAcademico.Domain.Entities.Presenca;
 
 namespace ControleAcademico.Data.Repositories
 {
@@ -18,7 +19,7 @@ namespace ControleAcademico.Data.Repositories
         }
 
         // Método para buscar presenças com base nos parâmetros fornecidos
-        public async Task<Presenca[]> PegarPresencaPorTudoAsync(DateOnly? data = null, int? presenca = null, int? idDisciplinasUsuario = null)
+        public async Task<Presenca[]> PegarPresencaPorTudoAsync(DateOnly? data = null, Presença? presenca = null, int? idDisciplinasUsuario = null)
         {
             IQueryable<Presenca> query = _context.Presencas.AsNoTracking();
 

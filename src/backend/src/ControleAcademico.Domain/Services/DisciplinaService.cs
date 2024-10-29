@@ -19,42 +19,53 @@ namespace ControleAcademico.Domain.Services
             this._cursoRepo = cursoRepo;
         }
 
-        public async Task<Disciplina> AdicionarDisciplina(Disciplina model)
+    public async Task<Disciplina> AdicionarDisciplina(Disciplina model)
+    {
+        try
         {
             // Verifica se já existe um curso com o mesmo nome
             var disciplinasComMesmoNome = await _disciplinaRepo.PegarDisciplinaPorTudoAsync(nome: model.Nome);
             if (disciplinasComMesmoNome.FirstOrDefault() != null)
-                throw new InvalidOperationException("Já existe um curso com esse nome.");
-
-            var disciplinasComCurso = await _disciplinaRepo.PegarDisciplinaPorTudoAsync(idCursoNavigation: model.IdCursoNavigation);
-            if (disciplinasComCurso.FirstOrDefault() != null) // se exitir o curso
-            {
-                // Adiciona o novo curso
-                _disciplinaRepo.Adicionar(model);
-                if (await _disciplinaRepo.SalvarMudancaAsync())
-                    return model;
-            }
-            throw new Exception("Erro ao salvar o curso.");
-        }
-
-        public async Task<Disciplina> AtualizarDisciplina(Disciplina model)
-        {
-            if (model.IdDisciplinas <= 0)
-                throw new ArgumentException("ID do curso é inválido.");
+                throw new InvalidOperationException("Já existe uma disciplina com esse nome.");
 
             // Verifica se o curso existe
-            var cursoExistente = await _disciplinaRepo.PegarDisciplinaPorTudoAsync(id: model.IdDisciplinas);
-            var curso = cursoExistente.FirstOrDefault();
-            if (curso == null)
+            var cursoExistente = await _cursoRepo.PegarCursoPorTudoAsync(model.IdCurso);
+            if (cursoExistente == null)
                 throw new InvalidOperationException("Curso inexistente.");
 
-            // Atualiza o curso
-            _disciplinaRepo.Atualizar(model);
+            // Adiciona o novo curso
+            _disciplinaRepo.Adicionar(model);
             if (await _disciplinaRepo.SalvarMudancaAsync())
                 return model;
-
-            throw new Exception("Erro ao atualizar o curso.");
+            return null;
         }
+        catch (Exception ex)
+        {
+            // Aqui você pode registrar o erro para facilitar o diagnóstico
+            throw new Exception($"Erro ao tentar adicionar disciplina: {ex.Message}");
+        }
+    }
+
+
+public async Task<Disciplina> AtualizarDisciplina(Disciplina model)
+{
+    // Verifica se o ID da disciplina é válido
+    if (model.IdDisciplinas <= 0)
+        throw new ArgumentException("ID da disciplina é inválido.");
+
+    // Verifica se o curso existe
+    var cursoExistente = await _cursoRepo.PegarCursoPorTudoAsync(model.IdCurso);
+    if (cursoExistente == null)
+        throw new InvalidOperationException("Curso inexistente.");
+
+    // Atualiza a disciplina
+    _disciplinaRepo.Atualizar(model);
+    if (await _disciplinaRepo.SalvarMudancaAsync())
+        return model;
+
+    throw new Exception("Erro ao atualizar a disciplina.");
+}
+
 
         public async Task<bool> DeletarDisciplina(int IdDisciplina)
         {
@@ -70,11 +81,11 @@ namespace ControleAcademico.Domain.Services
         }
 
 
-        public async Task<Disciplina[]> PegarDisciplinaPorTudo(int? id= null, string? nome= null, int? semestre= null, Curso? idCursoNavigation=null)
+        public async Task<Disciplina[]> PegarDisciplinaPorTudo(int? id= null, string? nome= null, int? semestre= null, int?IdCurso=null, Curso? idCursoNavigation=null)
         {
             try
             {
-                var curso = await _disciplinaRepo.PegarDisciplinaPorTudoAsync(id, nome,semestre, idCursoNavigation);
+                var curso = await _disciplinaRepo.PegarDisciplinaPorTudoAsync(id, nome,semestre, IdCurso, idCursoNavigation);
                 if (curso == null) return null;
 
                 return curso;

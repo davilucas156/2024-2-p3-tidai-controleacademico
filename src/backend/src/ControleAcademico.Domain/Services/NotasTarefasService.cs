@@ -1,16 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ControleAcademico.Domain.Entities;
 using ControleAcademico.Domain.Interfaces.Repositories;
 using ControleAcademico.Domain.Interfaces.Services;
-using static ControleAcademico.Domain.Entities.Curso;
 
 namespace ControleAcademico.Domain.Services
 {
     public class NotasTarefasService : INotasTarefasService
-        {
+    {
         private readonly INotasTarefasRepo _NotasTarefasRepo;
 
         public NotasTarefasService(INotasTarefasRepo NotasTarefasRepo) 
@@ -20,61 +18,54 @@ namespace ControleAcademico.Domain.Services
 
         public async Task<NotasTarefa> AdicionarNotas(NotasTarefa model)
         {
-            // Adiciona o novo curso
+            // Adiciona a nova nota
             _NotasTarefasRepo.Adicionar(model);
 
             if (await _NotasTarefasRepo.SalvarMudancaAsync())
                 return model;
 
-            throw new Exception("Erro ao salvar o curso.");
+            throw new Exception("Erro ao salvar a nota.");
         }
-
 
         public async Task<NotasTarefa> AtualizarNotas(NotasTarefa model)
         {
             if (model.Matricula <= 0)
-                throw new ArgumentException("ID do curso é inválido.");
+                throw new ArgumentException("ID da matrícula é inválido.");
 
-            // Verifica se o curso existe
-            var cursoExistente = await _NotasTarefasRepo.PegarTarefasPorTudoAsync(matricula: model.Matricula);
-            var curso = cursoExistente.FirstOrDefault();
-            if (curso == null)
-                throw new InvalidOperationException("Curso inexistente.");
+            // Verifica se a nota existe
+            var notasExistentes = await _NotasTarefasRepo.PegarTarefasPorTudoAsync(matricula: model.Matricula);
+            var nota = notasExistentes.FirstOrDefault(n => n.IdTarefa == model.IdTarefa);
+            if (nota == null)
+                throw new InvalidOperationException("Nota inexistente.");
 
-            // Atualiza o curso
+            // Atualiza a nota
             _NotasTarefasRepo.Atualizar(model);
             if (await _NotasTarefasRepo.SalvarMudancaAsync())
                 return model;
 
-            throw new Exception("Erro ao atualizar o curso.");
+            throw new Exception("Erro ao atualizar a nota.");
         }
 
-
-        public async Task<bool> DeletarNotas(int IdNotas)
+        public async Task<bool> DeletarNotas(int idNotas)
         {
-            {
-                var disciplinas = await _NotasTarefasRepo.PegarTarefasPorTudoAsync(idTarefa: IdNotas);
-                var curso = disciplinas.FirstOrDefault(); // Obter o primeiro curso encontrado
+            var notas = await _NotasTarefasRepo.PegarTarefasPorTudoAsync(idTarefa: idNotas);
+            var nota = notas.FirstOrDefault(); // Obter a primeira nota encontrada
 
-                if (curso == null) throw new Exception("Curso que tentou deletar não existe");
+            if (nota == null)
+                throw new Exception("Nota que tentou deletar não existe.");
 
-                _NotasTarefasRepo.Deletar(curso);
-                return await _NotasTarefasRepo.SalvarMudancaAsync();
-            }
+            _NotasTarefasRepo.Deletar(nota);
+            return await _NotasTarefasRepo.SalvarMudancaAsync();
         }
-
 
         public async Task<NotasTarefa[]> PegarNotasPorTudo(int? nota = null, int? matricula = null, int? idTarefa = null)
         {
-
             try
             {
-                var curso = await _NotasTarefasRepo.PegarTarefasPorTudoAsync(nota, matricula,idTarefa);
-                if (curso == null) return null;
-
-                return curso;
+                var notas = await _NotasTarefasRepo.PegarTarefasPorTudoAsync(nota, matricula, idTarefa);
+                return notas ?? Array.Empty<NotasTarefa>();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -84,18 +75,13 @@ namespace ControleAcademico.Domain.Services
         {
             try
             {
-                var cursos = await _NotasTarefasRepo.PegarTodasAsync();
-                if (cursos == null) return null;
-
-                return cursos;
+                var notas = await _NotasTarefasRepo.PegarTodasAsync();
+                return notas ?? Array.Empty<NotasTarefa>();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
-
-        
     }
 }

@@ -12,6 +12,6 @@ public partial class TarefasDisciplina
     public string? LinkArquivoTarefa { get; set; }
     public int IdDisciplinas { get; set; }
 
-    public virtual Disciplina IdDisciplinasNavigation { get; set; } = null!;
+    public virtual Disciplina? IdDisciplinasNavigation { get; set; } = null!;
     public virtual ICollection<NotasTarefa> NotasTarefas { get; set; } = new List<NotasTarefa>();
 }

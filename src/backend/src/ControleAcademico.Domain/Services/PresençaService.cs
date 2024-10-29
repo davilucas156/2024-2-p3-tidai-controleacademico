@@ -1,16 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ControleAcademico.Domain.Entities;
 using ControleAcademico.Domain.Interfaces.Repositories;
 using ControleAcademico.Domain.Interfaces.Services;
-using static ControleAcademico.Domain.Entities.Curso;
+using static ControleAcademico.Domain.Entities.Presenca;
 
 namespace ControleAcademico.Domain.Services
 {
     public class PresencaService : IPresencaService
-        {
+    {
         private readonly IPresencaRepo _PresencaRepo;
 
         public PresencaService(IPresencaRepo PresencaRepo) 
@@ -20,70 +19,66 @@ namespace ControleAcademico.Domain.Services
 
         public async Task<Presenca> AdicionarPresenca(Presenca model)
         {
-            // Adiciona o novo curso
+            // Adiciona a nova presença
             _PresencaRepo.Adicionar(model);
 
             if (await _PresencaRepo.SalvarMudancaAsync())
                 return model;
 
-            throw new Exception("Erro ao salvar o curso.");
+            throw new Exception("Erro ao salvar a presença.");
         }
 
         public async Task<Presenca> AtualizarPresenca(Presenca model)
         {
+            if (model.IdDisciplinasUsuario <= 0)
+                throw new ArgumentException("ID da presença é inválido.");
 
+            // Verifica se a presença existe
+            var presencaExistente = await _PresencaRepo.PegarPresencaPorTudoAsync(idDisciplinasUsuario: model.IdDisciplinasUsuario, data: null, presenca: null);
+            if (presencaExistente.FirstOrDefault() == null)
+                throw new InvalidOperationException("Presença inexistente.");
 
-            // Atualiza o curso
+            // Atualiza a presença
             _PresencaRepo.Atualizar(model);
             if (await _PresencaRepo.SalvarMudancaAsync())
                 return model;
 
-            throw new Exception("Erro ao atualizar o curso.");
+            throw new Exception("Erro ao atualizar a presença.");
         }
 
-
-        public async Task<bool> DeletarPresenca(int IdPresenca)
+        public async Task<bool> DeletarPresenca(int idPresenca)
         {
-            {
-                //var disciplinas = await _PresencaRepo.PegarTarefasPorTudoAsync(idTarefa: IdNotas);
-                //var curso = disciplinas.FirstOrDefault(); // Obter o primeiro curso encontrado
+            var presenca = await _PresencaRepo.PegarPresencaPorTudoAsync(idDisciplinasUsuario: null, data: null, presenca: null);
+            var presencaEncontrada = presenca.FirstOrDefault();
 
-                //if (curso == null) throw new Exception("Curso que tentou deletar não existe");
+            if (presencaEncontrada == null)
+                throw new Exception("Presença que tentou deletar não existe.");
 
-                //_PresencaRepo.Deletar(curso);
-                //return await _PresencaRepo.SalvarMudancaAsync();
-                return false;
-            }
+            _PresencaRepo.Deletar(presencaEncontrada);
+            return await _PresencaRepo.SalvarMudancaAsync();
         }
 
-
-        public async Task<Presenca[]> PegarPresencaPorTudo(DateOnly? data = null, int? presenca = null, int? idDisciplinasUsuario = null)
+        public async Task<Presenca[]> PegarPresencaPorTudo(DateOnly? data = null, Presença? presenca = null, int? idDisciplinasUsuario = null)
         {
-
             try
             {
-                var curso = await _PresencaRepo.PegarPresencaPorTudoAsync(data, presenca,idDisciplinasUsuario);
-                if (curso == null) return null;
-
-                return curso;
+                var presencas = await _PresencaRepo.PegarPresencaPorTudoAsync(data, presenca, idDisciplinasUsuario);
+                return presencas ?? Array.Empty<Presenca>();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
 
-
         public async Task<Presenca[]> PegarTodosPresencaAsynk()
         {
             try
             {
-                var cursos = await _PresencaRepo.PegarTodasAsync();
-                if (cursos == null) return null;
-
-                return cursos;
+                var presencas = await _PresencaRepo.PegarTodasAsync();
+                return presencas ?? Array.Empty<Presenca>();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
