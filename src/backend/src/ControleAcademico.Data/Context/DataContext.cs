@@ -74,29 +74,33 @@ public partial class ControleAcademicoContext : DbContext
                 .HasConstraintName("fk_disciplinas_cursos");
         });
 
-        modelBuilder.Entity<DisciplinasUsuario>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("disciplinas_usuario");
+modelBuilder.Entity<DisciplinasUsuario>(entity =>
+{
+    // Define a chave primária composta
+    entity.HasKey(e => new { e.Matricula, e.IdDisciplinas })
+        .HasName("PRIMARY");
 
-            entity.HasIndex(e => e.IdDisciplinas, "fk_disciplinas_usuario_disciplinas");
+    entity.ToTable("disciplinas_usuario");
 
-            entity.HasIndex(e => e.Matricula, "fk_disciplinas_usuario_usuarios");
+    entity.HasIndex(e => e.IdDisciplinas, "fk_disciplinas_usuario_disciplinas");
+    entity.HasIndex(e => e.Matricula, "fk_disciplinas_usuario_usuarios");
 
-            entity.Property(e => e.IdDisciplinas).HasColumnName("id_disciplinas");
-            entity.Property(e => e.Matricula).HasColumnName("matricula");
+    entity.Property(e => e.IdDisciplinas).HasColumnName("id_disciplinas");
+    entity.Property(e => e.Matricula).HasColumnName("matricula");
 
-            entity.HasOne(d => d.IdDisciplinasNavigation).WithMany()
-                .HasForeignKey(d => d.IdDisciplinas)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_disciplinas_usuario_disciplinas");
+    entity.HasOne(d => d.IdDisciplinasNavigation)
+        .WithMany(p => p.DisciplinasUsuarios) // Ajuste aqui se houver uma coleção de DisciplinasUsuarios na entidade Disciplina
+        .HasForeignKey(d => d.IdDisciplinas)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("fk_disciplinas_usuario_disciplinas");
 
-            entity.HasOne(d => d.MatriculaNavigation).WithMany()
-                .HasForeignKey(d => d.Matricula)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_disciplinas_usuario_usuarios");
-        });
+    entity.HasOne(d => d.MatriculaNavigation)
+        .WithMany(p => p.DisciplinasUsuarios) // Ajuste aqui se houver uma coleção de DisciplinasUsuarios na entidade Usuario
+        .HasForeignKey(d => d.Matricula)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("fk_disciplinas_usuario_usuarios");
+});
+
 
         modelBuilder.Entity<MaterialDisciplina>(entity =>
         {
