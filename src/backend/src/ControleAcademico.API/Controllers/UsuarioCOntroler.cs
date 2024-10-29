@@ -16,7 +16,22 @@ namespace ControleAcademico.API.Controllers
         {
             _usuarioService = usuarioService;
         }
+        [HttpGet("filtrados")]
+        public async Task<IActionResult> GetUSuariosFiltros(int? matricula = null, string? nome = null, string? cpf = null, string? email = null, string? endereco = null, Usuario.Tipos? tipo = null, string? senha = null, int? idCurso = null)
+        {
+            try
+            {
+                var cursos = await _usuarioService.PegarUsuarioPorTudo(matricula, nome, cpf, email, endereco, tipo, senha, idCurso);
+                if (cursos == null || cursos.Length == 0) return NoContent();
 
+                return Ok(cursos);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar cursos com filtros aplicados. Erro: {ex.Message}");
+            }
+        }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
