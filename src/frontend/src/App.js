@@ -1,9 +1,15 @@
 import './styles/App.css';
-import Login from './views/login'
+import ViewIndex from './views/index';  
+import { BrowserRouter as Router } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   return (
-   <Login />
+    <div className="App">
+      <Router>
+        <ViewIndex />
+      </Router>
+    </div>
   );
 }
 
